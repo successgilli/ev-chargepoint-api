@@ -1,0 +1,79 @@
+definitions:
+  github_com_successgilli_api-app_internal_controller_chargepoint_request.CreateChargePointRequest:
+    properties:
+      lat:
+        type: number
+      long:
+        type: number
+      name:
+        type: string
+      status:
+        $ref: '#/definitions/github_com_successgilli_api-app_internal_entities_chargepoint.ChargePointStatus'
+    required:
+    - lat
+    - long
+    - name
+    - status
+    type: object
+  github_com_successgilli_api-app_internal_controller_chargepoint_response.CreateChargePointResponse:
+    properties:
+      id:
+        type: integer
+      lat:
+        type: number
+      long:
+        type: number
+      name:
+        type: string
+      status:
+        $ref: '#/definitions/github_com_successgilli_api-app_internal_entities_chargepoint.ChargePointStatus'
+    type: object
+  github_com_successgilli_api-app_internal_controller_response.ErrorResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  github_com_successgilli_api-app_internal_entities_chargepoint.ChargePointStatus:
+    enum:
+    - AVAILABLE
+    - OCCUPIED
+    - OFFLINE
+    type: string
+    x-enum-varnames:
+    - AvailableStatus
+    - OccupiedStatus
+    - OfflineStatus
+info:
+  contact: {}
+paths:
+  /chargepoints:
+    post:
+      consumes:
+      - application/json
+      description: Creates a new charge point with the given name and location
+      parameters:
+      - description: Charge point payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_successgilli_api-app_internal_controller_chargepoint_request.CreateChargePointRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/github_com_successgilli_api-app_internal_controller_chargepoint_response.CreateChargePointResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_successgilli_api-app_internal_controller_response.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_successgilli_api-app_internal_controller_response.ErrorResponse'
+      summary: Create a charge point
+      tags:
+      - chargepoints
+swagger: "2.0"

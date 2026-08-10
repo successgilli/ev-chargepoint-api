@@ -11,6 +11,7 @@ This service exposes endpoints to create, retrieve, update, and delete EV charge
 - Go 1.26
 - Gin
 - SQLite
+- Follow golang standard project layout design https://github.com/golang-standards/project-layouthttps://github.com/golang-standards/project-layout
 
 ## Getting Started
 
@@ -21,10 +22,17 @@ This service exposes endpoints to create, retrieve, update, and delete EV charge
 ### Running the server
 
 ```bash
-go run main.go
+go run ./cmd/server
 ```
 
+### Generating swagger docs
+```sh
+go tool swag init -g cmd/server/main.go -o api --parseDependency --parseInternal
+```
 
+### View swagger docs
+- Generate docs
+- Visit configured path [http://127.0.0.1:8080/api/v1/swagger/index.html](http://127.0.0.1:8080/api/v1/swagger/index.html)
 
 ### Running tests
 
@@ -48,3 +56,9 @@ Approximately [X] hours.
 
 ## LLM Usage
 TODO: Mention LLM usage as it relates to this work.
+
+## TODO
+- Add remaining two endpoints
+- Add shutdown handling
+- Add catchall error route/middleware
+- Add clean and add docs for itnerfaces and structs

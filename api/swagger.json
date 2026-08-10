@@ -1,0 +1,120 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/chargepoints": {
+            "post": {
+                "description": "Creates a new charge point with the given name and location",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "chargepoints"
+                ],
+                "summary": "Create a charge point",
+                "parameters": [
+                    {
+                        "description": "Charge point payload",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_successgilli_api-app_internal_controller_chargepoint_request.CreateChargePointRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_successgilli_api-app_internal_controller_chargepoint_response.CreateChargePointResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_successgilli_api-app_internal_controller_response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_successgilli_api-app_internal_controller_response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "github_com_successgilli_api-app_internal_controller_chargepoint_request.CreateChargePointRequest": {
+            "type": "object",
+            "required": [
+                "lat",
+                "long",
+                "name",
+                "status"
+            ],
+            "properties": {
+                "lat": {
+                    "type": "number"
+                },
+                "long": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/definitions/github_com_successgilli_api-app_internal_entities_chargepoint.ChargePointStatus"
+                }
+            }
+        },
+        "github_com_successgilli_api-app_internal_controller_chargepoint_response.CreateChargePointResponse": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "lat": {
+                    "type": "number"
+                },
+                "long": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/definitions/github_com_successgilli_api-app_internal_entities_chargepoint.ChargePointStatus"
+                }
+            }
+        },
+        "github_com_successgilli_api-app_internal_controller_response.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_successgilli_api-app_internal_entities_chargepoint.ChargePointStatus": {
+            "type": "string",
+            "enum": [
+                "AVAILABLE",
+                "OCCUPIED",
+                "OFFLINE"
+            ],
+            "x-enum-varnames": [
+                "AvailableStatus",
+                "OccupiedStatus",
+                "OfflineStatus"
+            ]
+        }
+    }
+}
