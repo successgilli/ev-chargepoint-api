@@ -11,5 +11,5 @@ type Repository interface {
 	CreateOne(context.Context, entity.NewChargePoint) (*entity.ChargePoint, error)
 
 	// GetByID Gets a charge point by ID
-	GetByID(context.Context, int) (*entity.ChargePoint, error)
+	GetByID(context.Context, string) (*entity.ChargePoint, error)
 }

@@ -14,7 +14,7 @@ func Init(path string) (*sql.DB, error) {
 
 	schema := `
     CREATE TABLE IF NOT EXISTS charge_points (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        id TEXT PRIMARY KEY,
         name TEXT NOT NULL,
         latitude REAL NOT NULL,
         longitude REAL NOT NULL,

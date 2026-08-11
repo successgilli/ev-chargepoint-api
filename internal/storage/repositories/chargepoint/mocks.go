@@ -107,8 +107,8 @@ func (_c *MockRepository_CreateOne_Call) RunAndReturn(run func(context1 context.
 }
 
 // GetByID provides a mock function for the type MockRepository
-func (_mock *MockRepository) GetByID(context1 context.Context, n int) (*chargepoint.ChargePoint, error) {
-	ret := _mock.Called(context1, n)
+func (_mock *MockRepository) GetByID(context1 context.Context, s string) (*chargepoint.ChargePoint, error) {
+	ret := _mock.Called(context1, s)
 
 	if len(ret) == 0 {
 		panic("no return value specified for GetByID")
@@ -116,18 +116,18 @@ func (_mock *MockRepository) GetByID(context1 context.Context, n int) (*chargepo
 
 	var r0 *chargepoint.ChargePoint
 	var r1 error
-	if returnFunc, ok := ret.Get(0).(func(context.Context, int) (*chargepoint.ChargePoint, error)); ok {
-		return returnFunc(context1, n)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, string) (*chargepoint.ChargePoint, error)); ok {
+		return returnFunc(context1, s)
 	}
-	if returnFunc, ok := ret.Get(0).(func(context.Context, int) *chargepoint.ChargePoint); ok {
-		r0 = returnFunc(context1, n)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, string) *chargepoint.ChargePoint); ok {
+		r0 = returnFunc(context1, s)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*chargepoint.ChargePoint)
 		}
 	}
-	if returnFunc, ok := ret.Get(1).(func(context.Context, int) error); ok {
-		r1 = returnFunc(context1, n)
+	if returnFunc, ok := ret.Get(1).(func(context.Context, string) error); ok {
+		r1 = returnFunc(context1, s)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -141,20 +141,20 @@ type MockRepository_GetByID_Call struct {
 
 // GetByID is a helper method to define mock.On call
 //   - context1 context.Context
-//   - n int
-func (_e *MockRepository_Expecter) GetByID(context1 any, n any) *MockRepository_GetByID_Call {
-	return &MockRepository_GetByID_Call{Call: _e.mock.On("GetByID", context1, n)}
+//   - s string
+func (_e *MockRepository_Expecter) GetByID(context1 any, s any) *MockRepository_GetByID_Call {
+	return &MockRepository_GetByID_Call{Call: _e.mock.On("GetByID", context1, s)}
 }
 
-func (_c *MockRepository_GetByID_Call) Run(run func(context1 context.Context, n int)) *MockRepository_GetByID_Call {
+func (_c *MockRepository_GetByID_Call) Run(run func(context1 context.Context, s string)) *MockRepository_GetByID_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		var arg0 context.Context
 		if args[0] != nil {
 			arg0 = args[0].(context.Context)
 		}
-		var arg1 int
+		var arg1 string
 		if args[1] != nil {
-			arg1 = args[1].(int)
+			arg1 = args[1].(string)
 		}
 		run(
 			arg0,
@@ -169,7 +169,7 @@ func (_c *MockRepository_GetByID_Call) Return(chargePoint *chargepoint.ChargePoi
 	return _c
 }
 
-func (_c *MockRepository_GetByID_Call) RunAndReturn(run func(context1 context.Context, n int) (*chargepoint.ChargePoint, error)) *MockRepository_GetByID_Call {
+func (_c *MockRepository_GetByID_Call) RunAndReturn(run func(context1 context.Context, s string) (*chargepoint.ChargePoint, error)) *MockRepository_GetByID_Call {
 	_c.Call.Return(run)
 	return _c
 }

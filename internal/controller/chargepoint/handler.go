@@ -63,7 +63,7 @@ func (cpc *Controller) Create(c *gin.Context) {
 // @Tags chargepoints
 // @Accept json
 // @Produce json
-// @Param id path int true "Charge point ID"
+// @Param id path string true "Charge point ID"
 // @Success 200 {object} response.ChargePointResponse
 // @Failure 400 {object} ctrResponse.ErrorResponse
 // @Failure 404 {object} ctrResponse.ErrorResponse

@@ -6,6 +6,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"github.com/google/uuid"
 
 	entity "github.com/successgilli/api-app/internal/entities/chargepoint"
 	svc "github.com/successgilli/api-app/internal/service/chargepoint"
@@ -15,12 +16,15 @@ import (
 func TestService_Create_Success(t *testing.T) {
 	mockRepo := repo.NewMockRepository(t)
 
+	uid, err := uuid.NewV7()
+	require.NoError(t, err)
+
 	input := entity.NewChargePoint{
 		Name:   "Station A",
 		Status: entity.AvailableStatus,
 	}
 	expected := &entity.ChargePoint{
-		ID:     1,
+		ID:     uid.String(),
 		Name:   "Station A",
 		Status: entity.AvailableStatus,
 	}

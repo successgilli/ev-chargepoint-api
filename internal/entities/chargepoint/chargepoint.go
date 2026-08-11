@@ -16,7 +16,7 @@ type NewChargePoint struct {
 }
 
 type ChargePoint struct {
-	ID     int64
+	ID     string
 	Name   string
 	Lat    float64
 	Long   float64

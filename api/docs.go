@@ -76,7 +76,7 @@ const docTemplate = `{
                 "summary": "Get a charge point by ID",
                 "parameters": [
                     {
-                        "type": "integer",
+                        "type": "string",
                         "description": "Charge point ID",
                         "name": "id",
                         "in": "path",
@@ -148,7 +148,7 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "id": {
-                    "type": "integer"
+                    "type": "string"
                 },
                 "lat": {
                     "type": "number"

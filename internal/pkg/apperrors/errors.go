@@ -10,4 +10,7 @@ import "errors"
 var (
 	// ErrNotFound represents a "not found" application error
 	ErrNotFound = errors.New("not found")
+
+	// ErrInternal represents a generic internal application error
+	ErrInternal = errors.New("something went wrong")
 )

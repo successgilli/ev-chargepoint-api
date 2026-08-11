@@ -9,9 +9,9 @@ type ChargePointResponse struct {
 }
 
 type CreateChargePointResponse struct {
-	ID     int64                      `json:"id"`
+	ID     string                   `json:"id"`
 	Name   string                   `json:"name"`
 	Lat    float64                  `json:"lat"`
-	Long    float64                  `json:"long"`
+	Long   float64                  `json:"long"`
 	Status entity.ChargePointStatus `json:"status"`
 }

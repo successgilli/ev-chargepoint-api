@@ -23,7 +23,7 @@ definitions:
   github_com_successgilli_api-app_internal_controller_chargepoint_response.CreateChargePointResponse:
     properties:
       id:
-        type: integer
+        type: string
       lat:
         type: number
       long:
@@ -91,7 +91,7 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       produces:
       - application/json
       responses:
