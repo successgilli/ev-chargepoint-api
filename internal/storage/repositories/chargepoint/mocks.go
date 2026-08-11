@@ -39,8 +39,8 @@ func (_m *MockRepository) EXPECT() *MockRepository_Expecter {
 }
 
 // CreateOne provides a mock function for the type MockRepository
-func (_mock *MockRepository) CreateOne(ctx context.Context, cp chargepoint.NewChargePoint) (*chargepoint.ChargePoint, error) {
-	ret := _mock.Called(ctx, cp)
+func (_mock *MockRepository) CreateOne(context1 context.Context, newChargePoint chargepoint.NewChargePoint) (*chargepoint.ChargePoint, error) {
+	ret := _mock.Called(context1, newChargePoint)
 
 	if len(ret) == 0 {
 		panic("no return value specified for CreateOne")
@@ -49,17 +49,17 @@ func (_mock *MockRepository) CreateOne(ctx context.Context, cp chargepoint.NewCh
 	var r0 *chargepoint.ChargePoint
 	var r1 error
 	if returnFunc, ok := ret.Get(0).(func(context.Context, chargepoint.NewChargePoint) (*chargepoint.ChargePoint, error)); ok {
-		return returnFunc(ctx, cp)
+		return returnFunc(context1, newChargePoint)
 	}
 	if returnFunc, ok := ret.Get(0).(func(context.Context, chargepoint.NewChargePoint) *chargepoint.ChargePoint); ok {
-		r0 = returnFunc(ctx, cp)
+		r0 = returnFunc(context1, newChargePoint)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*chargepoint.ChargePoint)
 		}
 	}
 	if returnFunc, ok := ret.Get(1).(func(context.Context, chargepoint.NewChargePoint) error); ok {
-		r1 = returnFunc(ctx, cp)
+		r1 = returnFunc(context1, newChargePoint)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -72,13 +72,13 @@ type MockRepository_CreateOne_Call struct {
 }
 
 // CreateOne is a helper method to define mock.On call
-//   - ctx context.Context
-//   - cp chargepoint.NewChargePoint
-func (_e *MockRepository_Expecter) CreateOne(ctx any, cp any) *MockRepository_CreateOne_Call {
-	return &MockRepository_CreateOne_Call{Call: _e.mock.On("CreateOne", ctx, cp)}
+//   - context1 context.Context
+//   - newChargePoint chargepoint.NewChargePoint
+func (_e *MockRepository_Expecter) CreateOne(context1 any, newChargePoint any) *MockRepository_CreateOne_Call {
+	return &MockRepository_CreateOne_Call{Call: _e.mock.On("CreateOne", context1, newChargePoint)}
 }
 
-func (_c *MockRepository_CreateOne_Call) Run(run func(ctx context.Context, cp chargepoint.NewChargePoint)) *MockRepository_CreateOne_Call {
+func (_c *MockRepository_CreateOne_Call) Run(run func(context1 context.Context, newChargePoint chargepoint.NewChargePoint)) *MockRepository_CreateOne_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		var arg0 context.Context
 		if args[0] != nil {
@@ -101,7 +101,75 @@ func (_c *MockRepository_CreateOne_Call) Return(chargePoint *chargepoint.ChargeP
 	return _c
 }
 
-func (_c *MockRepository_CreateOne_Call) RunAndReturn(run func(ctx context.Context, cp chargepoint.NewChargePoint) (*chargepoint.ChargePoint, error)) *MockRepository_CreateOne_Call {
+func (_c *MockRepository_CreateOne_Call) RunAndReturn(run func(context1 context.Context, newChargePoint chargepoint.NewChargePoint) (*chargepoint.ChargePoint, error)) *MockRepository_CreateOne_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
+// GetByID provides a mock function for the type MockRepository
+func (_mock *MockRepository) GetByID(context1 context.Context, n int) (*chargepoint.ChargePoint, error) {
+	ret := _mock.Called(context1, n)
+
+	if len(ret) == 0 {
+		panic("no return value specified for GetByID")
+	}
+
+	var r0 *chargepoint.ChargePoint
+	var r1 error
+	if returnFunc, ok := ret.Get(0).(func(context.Context, int) (*chargepoint.ChargePoint, error)); ok {
+		return returnFunc(context1, n)
+	}
+	if returnFunc, ok := ret.Get(0).(func(context.Context, int) *chargepoint.ChargePoint); ok {
+		r0 = returnFunc(context1, n)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*chargepoint.ChargePoint)
+		}
+	}
+	if returnFunc, ok := ret.Get(1).(func(context.Context, int) error); ok {
+		r1 = returnFunc(context1, n)
+	} else {
+		r1 = ret.Error(1)
+	}
+	return r0, r1
+}
+
+// MockRepository_GetByID_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetByID'
+type MockRepository_GetByID_Call struct {
+	*mock.Call
+}
+
+// GetByID is a helper method to define mock.On call
+//   - context1 context.Context
+//   - n int
+func (_e *MockRepository_Expecter) GetByID(context1 any, n any) *MockRepository_GetByID_Call {
+	return &MockRepository_GetByID_Call{Call: _e.mock.On("GetByID", context1, n)}
+}
+
+func (_c *MockRepository_GetByID_Call) Run(run func(context1 context.Context, n int)) *MockRepository_GetByID_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		var arg0 context.Context
+		if args[0] != nil {
+			arg0 = args[0].(context.Context)
+		}
+		var arg1 int
+		if args[1] != nil {
+			arg1 = args[1].(int)
+		}
+		run(
+			arg0,
+			arg1,
+		)
+	})
+	return _c
+}
+
+func (_c *MockRepository_GetByID_Call) Return(chargePoint *chargepoint.ChargePoint, err error) *MockRepository_GetByID_Call {
+	_c.Call.Return(chargePoint, err)
+	return _c
+}
+
+func (_c *MockRepository_GetByID_Call) RunAndReturn(run func(context1 context.Context, n int) (*chargepoint.ChargePoint, error)) *MockRepository_GetByID_Call {
 	_c.Call.Return(run)
 	return _c
 }

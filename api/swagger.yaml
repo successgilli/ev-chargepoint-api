@@ -15,6 +15,11 @@ definitions:
     - name
     - status
     type: object
+  github_com_successgilli_api-app_internal_controller_chargepoint_response.ChargePointResponse:
+    properties:
+      data:
+        $ref: '#/definitions/github_com_successgilli_api-app_internal_controller_chargepoint_response.CreateChargePointResponse'
+    type: object
   github_com_successgilli_api-app_internal_controller_chargepoint_response.CreateChargePointResponse:
     properties:
       id:
@@ -74,6 +79,39 @@ paths:
           schema:
             $ref: '#/definitions/github_com_successgilli_api-app_internal_controller_response.ErrorResponse'
       summary: Create a charge point
+      tags:
+      - chargepoints
+  /chargepoints/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves a single charge point using its unique identifier
+      parameters:
+      - description: Charge point ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_successgilli_api-app_internal_controller_chargepoint_response.ChargePointResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_successgilli_api-app_internal_controller_response.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_successgilli_api-app_internal_controller_response.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_successgilli_api-app_internal_controller_response.ErrorResponse'
+      summary: Get a charge point by ID
       tags:
       - chargepoints
 swagger: "2.0"

@@ -26,3 +26,13 @@ func (s *Service) Create(ctx context.Context, cp entity.NewChargePoint) (*entity
 
 	return createdChargePoint, nil
 }
+
+// GetByID gets a charge point by ID
+func (s *Service) GetByID(ctx context.Context, id int) (*entity.ChargePoint, error) {
+	createdChargePoint, err := s.repo.GetByID(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+
+	return createdChargePoint, nil
+}

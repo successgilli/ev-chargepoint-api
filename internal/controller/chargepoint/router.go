@@ -16,4 +16,5 @@ func RegisterRoutes(r *gin.RouterGroup, sqlDB *sql.DB) {
 	api := r.Group("/chargepoints")
 
 	api.POST("/", ctr.Create)
+	api.GET("/:id", ctr.GetByID)
 }

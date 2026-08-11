@@ -8,5 +8,8 @@ import (
 
 type Repository interface {
 	// CreateOne creates one charge point
-	CreateOne(ctx context.Context, cp entity.NewChargePoint) (*entity.ChargePoint, error)
+	CreateOne(context.Context, entity.NewChargePoint) (*entity.ChargePoint, error)
+
+	// GetByID Gets a charge point by ID
+	GetByID(context.Context, int) (*entity.ChargePoint, error)
 }

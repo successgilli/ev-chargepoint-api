@@ -34,8 +34,14 @@ go tool swag init -g cmd/server/main.go -o api --parseDependency --parseInternal
 - Generate docs
 - Visit configured path [http://127.0.0.1:8080/api/v1/swagger/index.html](http://127.0.0.1:8080/api/v1/swagger/index.html)
 
-### Running tests
+### Generating mocks for test
+This repo uses mockery for generating mocks as part of its tools.
+Run the below to regenerate mocks after updates to signatures.
+```sh
+go tool mockery
+```
 
+### Running tests
 ```bash
 go test ./...
 ```
@@ -47,8 +53,6 @@ go test ./...
 | GET    | /chargepoints         | List all charge points        |
 | GET    | /chargepoints/{id}    | Get a single charge point     |
 | POST   | /chargepoints         | Create a new charge point     |
-| PUT    | /chargepoints/{id}    | Update a charge point         |
-| DELETE | /chargepoints/{id}    | Delete a charge point         |
 
 ## Time Spent
 
@@ -62,3 +66,4 @@ TODO: Mention LLM usage as it relates to this work.
 - Add shutdown handling
 - Add catchall error route/middleware
 - Add clean and add docs for itnerfaces and structs
+- Check validation for lat/long. 0 is rejected and might be valid.

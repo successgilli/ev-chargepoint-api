@@ -49,6 +49,56 @@
                     }
                 }
             }
+        },
+        "/chargepoints/{id}": {
+            "get": {
+                "description": "Retrieves a single charge point using its unique identifier",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "chargepoints"
+                ],
+                "summary": "Get a charge point by ID",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Charge point ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_successgilli_api-app_internal_controller_chargepoint_response.ChargePointResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_successgilli_api-app_internal_controller_response.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_successgilli_api-app_internal_controller_response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_successgilli_api-app_internal_controller_response.ErrorResponse"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -72,6 +122,14 @@
                 },
                 "status": {
                     "$ref": "#/definitions/github_com_successgilli_api-app_internal_entities_chargepoint.ChargePointStatus"
+                }
+            }
+        },
+        "github_com_successgilli_api-app_internal_controller_chargepoint_response.ChargePointResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/github_com_successgilli_api-app_internal_controller_chargepoint_response.CreateChargePointResponse"
                 }
             }
         },
