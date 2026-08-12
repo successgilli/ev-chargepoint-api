@@ -17,4 +17,5 @@ func RegisterRoutes(r *gin.RouterGroup, sqlDB *sql.DB) {
 
 	api.POST("/", ctr.Create)
 	api.GET("/:id", ctr.GetByID)
+	api.GET("/nearby", ctr.GetAllNearBy)
 }

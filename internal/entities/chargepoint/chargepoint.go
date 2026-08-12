@@ -8,17 +8,21 @@ const (
 	OfflineStatus   ChargePointStatus = "OFFLINE"
 )
 
-type NewChargePoint struct {
-	Name   string
-	Lat    float64
-	Long   float64
-	Status ChargePointStatus
-}
-
+// ChargePoint is a charge point entity
 type ChargePoint struct {
 	ID     string
 	Name   string
 	Lat    float64
 	Long   float64
 	Status ChargePointStatus
+}
+
+// IsValid checks if a status is valid
+func (s ChargePointStatus) IsValid() bool {
+	switch s {
+	case AvailableStatus, OccupiedStatus, OfflineStatus:
+		return true
+	default:
+		return false
+	}
 }

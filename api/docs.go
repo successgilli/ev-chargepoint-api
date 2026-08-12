@@ -43,7 +43,65 @@ const docTemplate = `{
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/github_com_successgilli_api-app_internal_controller_chargepoint_response.CreateChargePointResponse"
+                            "$ref": "#/definitions/github_com_successgilli_api-app_internal_controller_chargepoint_response.ChargePointResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_successgilli_api-app_internal_controller_response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_successgilli_api-app_internal_controller_response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/chargepoints/nearby": {
+            "get": {
+                "description": "Retrieves all charge points within the given radius (in km) of the specified latitude and longitude",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "chargepoints"
+                ],
+                "summary": "Find charge points near a location",
+                "parameters": [
+                    {
+                        "type": "number",
+                        "description": "Latitude of the search center",
+                        "name": "lat",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "number",
+                        "description": "Longitude of the search center",
+                        "name": "lon",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "number",
+                        "description": "Search radius in kilometers",
+                        "name": "radius",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_successgilli_api-app_internal_controller_chargepoint_response.ChargePointsResponse"
                         }
                     },
                     "400": {
@@ -140,11 +198,11 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "data": {
-                    "$ref": "#/definitions/github_com_successgilli_api-app_internal_controller_chargepoint_response.CreateChargePointResponse"
+                    "$ref": "#/definitions/github_com_successgilli_api-app_internal_controller_chargepoint_response.ChargePointResponseItem"
                 }
             }
         },
-        "github_com_successgilli_api-app_internal_controller_chargepoint_response.CreateChargePointResponse": {
+        "github_com_successgilli_api-app_internal_controller_chargepoint_response.ChargePointResponseItem": {
             "type": "object",
             "properties": {
                 "id": {
@@ -161,6 +219,17 @@ const docTemplate = `{
                 },
                 "status": {
                     "$ref": "#/definitions/github_com_successgilli_api-app_internal_entities_chargepoint.ChargePointStatus"
+                }
+            }
+        },
+        "github_com_successgilli_api-app_internal_controller_chargepoint_response.ChargePointsResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_successgilli_api-app_internal_controller_chargepoint_response.ChargePointResponseItem"
+                    }
                 }
             }
         },

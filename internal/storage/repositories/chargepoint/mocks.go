@@ -39,8 +39,8 @@ func (_m *MockRepository) EXPECT() *MockRepository_Expecter {
 }
 
 // CreateOne provides a mock function for the type MockRepository
-func (_mock *MockRepository) CreateOne(context1 context.Context, newChargePoint chargepoint.NewChargePoint) (*chargepoint.ChargePoint, error) {
-	ret := _mock.Called(context1, newChargePoint)
+func (_mock *MockRepository) CreateOne(context1 context.Context, createChargePointParam CreateChargePointParam) (*chargepoint.ChargePoint, error) {
+	ret := _mock.Called(context1, createChargePointParam)
 
 	if len(ret) == 0 {
 		panic("no return value specified for CreateOne")
@@ -48,18 +48,18 @@ func (_mock *MockRepository) CreateOne(context1 context.Context, newChargePoint 
 
 	var r0 *chargepoint.ChargePoint
 	var r1 error
-	if returnFunc, ok := ret.Get(0).(func(context.Context, chargepoint.NewChargePoint) (*chargepoint.ChargePoint, error)); ok {
-		return returnFunc(context1, newChargePoint)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, CreateChargePointParam) (*chargepoint.ChargePoint, error)); ok {
+		return returnFunc(context1, createChargePointParam)
 	}
-	if returnFunc, ok := ret.Get(0).(func(context.Context, chargepoint.NewChargePoint) *chargepoint.ChargePoint); ok {
-		r0 = returnFunc(context1, newChargePoint)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, CreateChargePointParam) *chargepoint.ChargePoint); ok {
+		r0 = returnFunc(context1, createChargePointParam)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*chargepoint.ChargePoint)
 		}
 	}
-	if returnFunc, ok := ret.Get(1).(func(context.Context, chargepoint.NewChargePoint) error); ok {
-		r1 = returnFunc(context1, newChargePoint)
+	if returnFunc, ok := ret.Get(1).(func(context.Context, CreateChargePointParam) error); ok {
+		r1 = returnFunc(context1, createChargePointParam)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -73,20 +73,20 @@ type MockRepository_CreateOne_Call struct {
 
 // CreateOne is a helper method to define mock.On call
 //   - context1 context.Context
-//   - newChargePoint chargepoint.NewChargePoint
-func (_e *MockRepository_Expecter) CreateOne(context1 any, newChargePoint any) *MockRepository_CreateOne_Call {
-	return &MockRepository_CreateOne_Call{Call: _e.mock.On("CreateOne", context1, newChargePoint)}
+//   - createChargePointParam CreateChargePointParam
+func (_e *MockRepository_Expecter) CreateOne(context1 any, createChargePointParam any) *MockRepository_CreateOne_Call {
+	return &MockRepository_CreateOne_Call{Call: _e.mock.On("CreateOne", context1, createChargePointParam)}
 }
 
-func (_c *MockRepository_CreateOne_Call) Run(run func(context1 context.Context, newChargePoint chargepoint.NewChargePoint)) *MockRepository_CreateOne_Call {
+func (_c *MockRepository_CreateOne_Call) Run(run func(context1 context.Context, createChargePointParam CreateChargePointParam)) *MockRepository_CreateOne_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		var arg0 context.Context
 		if args[0] != nil {
 			arg0 = args[0].(context.Context)
 		}
-		var arg1 chargepoint.NewChargePoint
+		var arg1 CreateChargePointParam
 		if args[1] != nil {
-			arg1 = args[1].(chargepoint.NewChargePoint)
+			arg1 = args[1].(CreateChargePointParam)
 		}
 		run(
 			arg0,
@@ -101,7 +101,75 @@ func (_c *MockRepository_CreateOne_Call) Return(chargePoint *chargepoint.ChargeP
 	return _c
 }
 
-func (_c *MockRepository_CreateOne_Call) RunAndReturn(run func(context1 context.Context, newChargePoint chargepoint.NewChargePoint) (*chargepoint.ChargePoint, error)) *MockRepository_CreateOne_Call {
+func (_c *MockRepository_CreateOne_Call) RunAndReturn(run func(context1 context.Context, createChargePointParam CreateChargePointParam) (*chargepoint.ChargePoint, error)) *MockRepository_CreateOne_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
+// GetAllNearBy provides a mock function for the type MockRepository
+func (_mock *MockRepository) GetAllNearBy(context1 context.Context, findNearByParam FindNearByParam) ([]chargepoint.ChargePoint, error) {
+	ret := _mock.Called(context1, findNearByParam)
+
+	if len(ret) == 0 {
+		panic("no return value specified for GetAllNearBy")
+	}
+
+	var r0 []chargepoint.ChargePoint
+	var r1 error
+	if returnFunc, ok := ret.Get(0).(func(context.Context, FindNearByParam) ([]chargepoint.ChargePoint, error)); ok {
+		return returnFunc(context1, findNearByParam)
+	}
+	if returnFunc, ok := ret.Get(0).(func(context.Context, FindNearByParam) []chargepoint.ChargePoint); ok {
+		r0 = returnFunc(context1, findNearByParam)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]chargepoint.ChargePoint)
+		}
+	}
+	if returnFunc, ok := ret.Get(1).(func(context.Context, FindNearByParam) error); ok {
+		r1 = returnFunc(context1, findNearByParam)
+	} else {
+		r1 = ret.Error(1)
+	}
+	return r0, r1
+}
+
+// MockRepository_GetAllNearBy_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetAllNearBy'
+type MockRepository_GetAllNearBy_Call struct {
+	*mock.Call
+}
+
+// GetAllNearBy is a helper method to define mock.On call
+//   - context1 context.Context
+//   - findNearByParam FindNearByParam
+func (_e *MockRepository_Expecter) GetAllNearBy(context1 any, findNearByParam any) *MockRepository_GetAllNearBy_Call {
+	return &MockRepository_GetAllNearBy_Call{Call: _e.mock.On("GetAllNearBy", context1, findNearByParam)}
+}
+
+func (_c *MockRepository_GetAllNearBy_Call) Run(run func(context1 context.Context, findNearByParam FindNearByParam)) *MockRepository_GetAllNearBy_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		var arg0 context.Context
+		if args[0] != nil {
+			arg0 = args[0].(context.Context)
+		}
+		var arg1 FindNearByParam
+		if args[1] != nil {
+			arg1 = args[1].(FindNearByParam)
+		}
+		run(
+			arg0,
+			arg1,
+		)
+	})
+	return _c
+}
+
+func (_c *MockRepository_GetAllNearBy_Call) Return(chargePoints []chargepoint.ChargePoint, err error) *MockRepository_GetAllNearBy_Call {
+	_c.Call.Return(chargePoints, err)
+	return _c
+}
+
+func (_c *MockRepository_GetAllNearBy_Call) RunAndReturn(run func(context1 context.Context, findNearByParam FindNearByParam) ([]chargepoint.ChargePoint, error)) *MockRepository_GetAllNearBy_Call {
 	_c.Call.Return(run)
 	return _c
 }

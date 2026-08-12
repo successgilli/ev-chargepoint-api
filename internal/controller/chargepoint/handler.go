@@ -17,7 +17,7 @@ type Controller struct {
 	service *chargePointSvc.Service
 }
 
-// NewController creates a new chargepoint controller
+// NewController creates a new charge point controller
 func NewController(svc *chargePointSvc.Service) Controller {
 	return Controller{
 		service: svc,
@@ -31,7 +31,7 @@ func NewController(svc *chargePointSvc.Service) Controller {
 // @Accept json
 // @Produce json
 // @Param request body request.CreateChargePointRequest true "Charge point payload"
-// @Success 201 {object} response.CreateChargePointResponse
+// @Success 201 {object} response.ChargePointResponse
 // @Failure 400 {object} ctrResponse.ErrorResponse
 // @Failure 500 {object} ctrResponse.ErrorResponse
 // @Router /chargepoints [post]
@@ -42,19 +42,21 @@ func (cpc *Controller) Create(c *gin.Context) {
 		return
 	}
 
-	chargePoint, err := cpc.service.Create(c.Request.Context(), req.ToEntity())
+	chargePoint, err := cpc.service.Create(c.Request.Context(), req.ToCreateChargePointCommand())
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, ctrResponse.ErrorResponse{Error: err.Error()})
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"data": response.CreateChargePointResponse{
-		ID:     chargePoint.ID,
-		Name:   chargePoint.Name,
-		Lat:    chargePoint.Lat,
-		Long:   chargePoint.Long,
-		Status: chargePoint.Status,
-	}})
+	c.JSON(http.StatusOK, response.ChargePointResponse{
+		Data: response.ChargePointResponseItem{
+			ID:     chargePoint.ID,
+			Name:   chargePoint.Name,
+			Lat:    chargePoint.Lat,
+			Long:   chargePoint.Long,
+			Status: chargePoint.Status,
+		},
+	})
 }
 
 // GetByID retrieves a single charge point by its ID.
@@ -87,11 +89,54 @@ func (cpc *Controller) GetByID(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"data": response.CreateChargePointResponse{
-		ID:     chargePoint.ID,
-		Name:   chargePoint.Name,
-		Lat:    chargePoint.Lat,
-		Long:   chargePoint.Long,
-		Status: chargePoint.Status,
-	}})
+	c.JSON(http.StatusOK, response.ChargePointResponse{
+		Data: response.ChargePointResponseItem{
+			ID:     chargePoint.ID,
+			Name:   chargePoint.Name,
+			Lat:    chargePoint.Lat,
+			Long:   chargePoint.Long,
+			Status: chargePoint.Status,
+		},
+	})
+}
+
+// GetAllNearBy finds all charge points within a given radius of a location.
+// @Summary Find charge points near a location
+// @Description Retrieves all charge points within the given radius (in km) of the specified latitude and longitude
+// @Tags chargepoints
+// @Accept json
+// @Produce json
+// @Param lat query number true "Latitude of the search center"
+// @Param lon query number true "Longitude of the search center"
+// @Param radius query number true "Search radius in kilometers"
+// @Success 200 {object} response.ChargePointsResponse
+// @Failure 400 {object} ctrResponse.ErrorResponse
+// @Failure 500 {object} ctrResponse.ErrorResponse
+// @Router /chargepoints/nearby [get]
+func (cpc *Controller) GetAllNearBy(c *gin.Context) {
+	req, err := request.NewFindNearbyRequest(c)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, ctrResponse.ErrorResponse{Error: err.Error()})
+		return
+	}
+
+	results, err := cpc.service.GetAllNearBy(c.Request.Context(), req.ToFindNearByCommand())
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, ctrResponse.ErrorResponse{Error: err.Error()})
+		return
+	}
+
+	chargePoints := []response.ChargePointResponseItem{}
+
+	for i := range results {
+		chargePoints = append(chargePoints, response.ChargePointResponseItem{
+			ID:     results[i].ID,
+			Name:   results[i].Name,
+			Lat:    results[i].Lat,
+			Long:   results[i].Long,
+			Status: results[i].Status,
+		})
+	}
+
+	c.JSON(http.StatusOK, response.ChargePointsResponse{Data: chargePoints})
 }

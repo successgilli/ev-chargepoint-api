@@ -11,3 +11,7 @@ import (
 func RegisterRoutes(r *gin.RouterGroup, sqlDB *sql.DB) {
 	chargepoint.RegisterRoutes(r, sqlDB)
 }
+
+func RegisterCustomValidators() error {
+	return chargepoint.RegisterCustomValidators()
+}

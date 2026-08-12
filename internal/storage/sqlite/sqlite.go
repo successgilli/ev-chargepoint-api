@@ -1,3 +1,4 @@
+// Package sqlite is the sqlite integration package
 package sqlite
 
 import (

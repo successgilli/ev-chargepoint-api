@@ -25,8 +25,10 @@ func main() {
 	if err != nil {
 		panic(fmt.Errorf("error initializing DB %w", err))
 	}
+	defer db.Close()
 
 	registerRoutes(r, db)
+	registerCustomValidators()
 
 	r.Run(":8080")
 }
@@ -45,4 +47,11 @@ func registerSwagger(r *gin.RouterGroup) {
 	apiDocs.SwaggerInfo.BasePath = baseAPI
 	apiDocs.SwaggerInfo.Version = "v0.1"
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
+}
+
+// registerCustomValidators registers custom validators
+func registerCustomValidators() {
+	if err := controller.RegisterCustomValidators(); err != nil {
+		panic(err)
+	}
 }

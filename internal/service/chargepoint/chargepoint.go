@@ -18,8 +18,13 @@ func NewService(repo repository.Repository) *Service {
 }
 
 // Create crates a new charge point
-func (s *Service) Create(ctx context.Context, cp entity.NewChargePoint) (*entity.ChargePoint, error) {
-	createdChargePoint, err := s.repo.CreateOne(ctx, cp)
+func (s *Service) Create(ctx context.Context, cmd CreateChargePointCommand) (*entity.ChargePoint, error) {
+	createdChargePoint, err := s.repo.CreateOne(ctx, repository.CreateChargePointParam{
+		Name:   cmd.Name,
+		Lat:    cmd.Lat,
+		Long:   cmd.Long,
+		Status: cmd.Status,
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -35,4 +40,18 @@ func (s *Service) GetByID(ctx context.Context, id string) (*entity.ChargePoint, 
 	}
 
 	return createdChargePoint, nil
+}
+
+// GetAllNearBy gets all charge points nearby
+func (s *Service) GetAllNearBy(ctx context.Context, cmd FindNearByCommand) ([]entity.ChargePoint, error) {
+	cps, err := s.repo.GetAllNearBy(ctx, repository.FindNearByParam{
+		Latitude:  cmd.Latitude,
+		Longitude: cmd.Longitude,
+		RadiusKM:  cmd.RadiusKM,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	return cps, nil
 }
