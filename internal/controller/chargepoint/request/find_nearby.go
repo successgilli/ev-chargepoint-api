@@ -8,7 +8,7 @@ import (
 type FindNearbyRequest struct {
 	Latitude  float64 `form:"lat" binding:"required,latitude"`
 	Longitude float64 `form:"lon" binding:"required,longitude"`
-	RadiusKm  float64 `form:"radius" binding:"required,gt=0"`
+	RadiusKm  float64 `form:"radius" binding:"required,gt=0,lte=1000"`
 }
 
 // NewFindNearbyRequest creates a new find-near-by request
