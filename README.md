@@ -71,3 +71,9 @@ Approximately 6 hours.
 
 ## LLM Usage
 Collaborated on this assessment and generated this readme with Claude Sonnet.
+
+## Screenshots
+![swagger-overview](./docs/first-3-endpoints-swagger.png)
+![create-charge-point-swagger](./docs/create-charge-point-swagger.png)
+![get-charge-point-byid-swagger](./docs/get-charge-point-byid-swagger.png)
+![find-nearby-swagger](./docs/find-nearby-swagger.png)
