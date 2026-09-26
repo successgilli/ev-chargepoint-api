@@ -2,6 +2,7 @@ package chargepoint
 
 import (
 	"context"
+	"fmt"
 
 	entity "github.com/successgilli/api-app/internal/entities/chargepoint"
 	repository "github.com/successgilli/api-app/internal/storage/repositories/chargepoint"
@@ -54,4 +55,16 @@ func (s *Service) GetAllNearBy(ctx context.Context, cmd FindNearByCommand) ([]en
 	}
 
 	return cps, nil
+}
+
+// GetByID gets a charge point by ID
+func (s *Service) GetByID(ctx context.Context, id string) (*entity.ChargePoint, error) {
+	createdChargePoint, err := s.repo.GetByID(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+
+	fmt.Sprintln("Armpit")
+
+	return createdChargePoint, nil
 }
